@@ -1,4 +1,6 @@
 <script>
+    import IvBar from "../../components/+iv_bar.svelte";
+
     let attack = 0;
     let defense = 0;
     let hp = 0;
@@ -15,18 +17,18 @@
     
     <div class="w-1/2 mx-auto flex gap-10 flex-col justify-center">
         <div>
-            <input type="range" id="volume" name="volume" min="0" max="15" bind:value={attack} />
-            <label for="volume">Attaque : {attack}</label>
+          <IvBar bind:attack={attack} defense={null} hp={null} />
         </div>
         <div>
-            <input type="range" id="volume" name="volume" min="0" max="15" bind:value={defense} />
-            <label for="volume">Défense : {defense}</label>
+         <IvBar attack={null} bind:defense={defense} hp={null} />
         </div>
         <div>
-            <input type="range" id="volume" name="volume" min="0" max="15" bind:value={hp} />
-            <label for="volume">PV : {hp}</label>
+          <IvBar attack={null} defense={null} bind:hp={hp} />
         </div>
     </div>
+    { attack }
+    { defense }
+    { hp }
     <button
     on:click={ () => {
         calculIV();
