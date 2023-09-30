@@ -18,7 +18,7 @@
 			</picture>
 		</span>
 
-		to your new<br />SvelteKit app
+	sur le calculateur <br />d'IV pokémon 
 	</h1>
 
 	<h2>
