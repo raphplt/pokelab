@@ -4,9 +4,7 @@
 
 <header class="flex items-center justify-between bg-blue-400">
 	<div class="">
-		<a href="/">
-			HOME
-		</a>
+		<a href="/"> HOME </a>
 	</div>
 
 	<nav class="">
@@ -19,11 +17,9 @@
 			</li>
 			<li aria-current={$page.url.pathname.startsWith('/iv-calculator') ? 'page' : undefined}>
 				<a href="/iv-calculator">Iv calculator</a>
-			</li>	
+			</li>
 		</ul>
 	</nav>
 
-	<div class="corner">
-	</div>
+	<div class="corner" />
 </header>
-
