@@ -34,25 +34,42 @@ fetchPokemonData();
 // Data transformation. Extract Pokémon names from the object.
 export const pokemonNames = derived(apiData, ($apiData) => {
 	const pokemonArray = Object.values($apiData);
-	return pokemonArray.map((pokemon: any) => {
-		return { pokemonName: pokemon.pokemon_name, pokemonId: pokemon.pokemon_id };
-	});
+	const uniquePokemonMap = pokemonArray.reduce((map: any, pokemon: any) => {
+		map[pokemon.pokemon_name] = {
+			pokemonName: pokemon.pokemon_name,
+			pokemonId: pokemon.pokemon_id
+		};
+		return map;
+	}, {});
+
+	return Object.values(uniquePokemonMap as any);
 });
 
 // Data transformation. Extract Pokémon base stats from the object.
 export const pokemonStats = derived(apiData, ($apiData) => {
 	const pokemonArray = Object.values($apiData);
-	console.log(pokemonArray);
-	return pokemonArray.map((pokemon: any) => {
+	const uniquePokemonMap = pokemonArray.reduce((map: any, pokemon: any) => {
 		const baseStamina = parseInt(pokemon.base_stamina);
 		const baseDefense = parseInt(pokemon.base_defense);
 		const baseAttack = parseInt(pokemon.base_attack);
-		return {
-			pokemonName: pokemon.pokemon_name,
-			baseStamina,
-			baseDefense,
-			baseAttack,
-			totalStats: baseStamina + baseDefense + baseAttack
-		};
-	});
+
+		if (!map[pokemon.pokemon_name]) {
+			map[pokemon.pokemon_name] = {
+				pokemonName: pokemon.pokemon_name,
+				baseStamina: 0,
+				baseDefense: 0,
+				baseAttack: 0,
+				totalStats: 0
+			};
+		}
+
+		map[pokemon.pokemon_name].baseStamina += baseStamina;
+		map[pokemon.pokemon_name].baseDefense += baseDefense;
+		map[pokemon.pokemon_name].baseAttack += baseAttack;
+		map[pokemon.pokemon_name].totalStats += baseStamina + baseDefense + baseAttack;
+
+		return map;
+	}, {});
+
+	return Object.values(uniquePokemonMap as any);
 });

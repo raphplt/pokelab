@@ -8,20 +8,18 @@
 	import logo_stamina from '$lib/images/logo_stamina.png';
 	import stats from '$lib/images/stats.png';
 
+	async function loadData() {
+		const unsubscribe = apiData.subscribe(($apiData) => {
+			if (Object.keys($apiData).length === 0) {
+				return;
+			}
+			calculIV();
+		});
 
-    async function loadData() {
-        const unsubscribe = apiData.subscribe(($apiData) => {
-            if (Object.keys($apiData).length === 0) {
-                return;
-            }
-            calculIV();
-        });
+		onMount(() => unsubscribe);
+	}
 
-        onMount(() => unsubscribe);
-    }
-
-    loadData();
-
+	loadData();
 
 	// Bests base stats
 	const bestAttack = 300;
@@ -175,7 +173,7 @@
 			bind:value={choosenPokemon}
 			class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/3 mx-auto mt-4 p-2.5"
 		>
-		      <option selected disabled>Choisir un Pokémon</option>
+			<option selected disabled>Choisir un Pokémon</option>
 
 			<!-- <option selected disabled>Choisir un Pokémon</option> -->
 			{#each $pokemonNames as pokemon}

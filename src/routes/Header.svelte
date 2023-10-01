@@ -1,14 +1,14 @@
 <script>
 	import { page } from '$app/stores';
+	import pokeball from '$lib/images/pokeball.png';
+
 </script>
 
 <header class="flex items-center justify-between bg-blue-400">
-	<div class="">
-		<a href="/"> HOME </a>
-	</div>
+<img src={pokeball} alt="home" class="w-[2.5%] h-1/12 block cursor-pointer ml-6">
 
 	<nav class="">
-		<ul class="flex gap-20 font-semibold text-lg">
+		<ul class="flex gap-12 font-semibold text-lg">
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Accueil</a>
 			</li>
@@ -21,5 +21,5 @@
 		</ul>
 	</nav>
 
-	<div class="corner" />
+	<div class="mr-6">CC</div>
 </header>
