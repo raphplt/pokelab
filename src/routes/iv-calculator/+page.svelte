@@ -7,6 +7,7 @@
 	import logo_pv from '$lib/images/logo_pv.png';
 	import logo_stamina from '$lib/images/logo_stamina.png';
 	import stats from '$lib/images/stats.png';
+	import question_mark from '$lib/images/question_mark.png';
 
 	async function loadData() {
 		const unsubscribe = apiData.subscribe(($apiData) => {
@@ -157,6 +158,30 @@
 			</a>
 		{/if}
 	</div>
+</section>
+<section>
+	<div
+		class="text-2xl flex items-center gap-3 mb-6 w-10/12 mx-auto bg-blue-300 py-3 rounded-2xl text-left pl-8"
+	>
+		<img src={question_mark} alt="stats" class="w-[2%] inline-block" />
+		Qu'est ce que les IV ?
+	</div>
+	<p class="w-10/12 mx-auto">
+		Dans Pokémon GO, les Individual Values, ou IV, sont similaires aux jeux principaux. Ils sont
+		essentiels pour évaluer le potentiel de votre Pokémon. Contrairement aux jeux traditionnels, il
+		existe seulement trois IV dans Pokémon GO, à savoir les Points de Vie (PV), l'Attaque et la
+		Défense, chacun variant de 0 à 15 pour chaque statistique. Ces IV sont directement liés aux
+		Points de Combat (PC) et reflètent toutes les caractéristiques de votre Pokémon. Par conséquent,
+		un Pokémon peut présenter des IV de 0-0-0 ou 15-15-15. Lorsqu'un Pokémon a des IV parfaits
+		(c'est-à-dire 15-15-15), cela signifie qu'il a atteint 100% de son potentiel en IV, avec un
+		total de 45 pour ces trois statistiques combinées. <br />
+		Tandis que les IVs jouent un rôle crucial pour rechercher un Pokémon compétitif, il est indéniable
+		que les statistiques de base revêtent une importance plus objective. Chaque espèce de Pokémon possède
+		des statistiques de base qui sont réparties dans les trois catégories mentionnées précédemment. Les
+		statistiques de base demeurent constantes pour chaque espèce de Pokémon. Par exemple, prenons Pikachu,
+		qui a une base de 112 en attaque, 96 en défense et 111 en endurance. Un Pikachu parfait aurait toutes
+		ces statistiques augmentées de 15.
+	</p>
 </section>
 <section>
 	<!-- {#if iv > 0} -->

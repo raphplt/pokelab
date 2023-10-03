@@ -1,11 +1,10 @@
 <script>
 	import { page } from '$app/stores';
 	import pokeball from '$lib/images/pokeball.png';
-
 </script>
 
 <header class="flex items-center justify-between bg-blue-400">
-<img src={pokeball} alt="home" class="w-[2.5%] h-1/12 block cursor-pointer ml-6">
+	<img src={pokeball} alt="home" class="w-[2.5%] h-1/12 block cursor-pointer ml-6" />
 
 	<nav class="">
 		<ul class="flex gap-12 font-semibold text-lg">
