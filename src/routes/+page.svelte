@@ -18,12 +18,20 @@
 	<div class="flex flex-col gap-16 mt-6">
 		<a rel="stylesheet" href="/iv-calculator">
 			<picture class="">
-				<img src={iv_calculator} alt="Welcome" class=" mx-auto w-2/5 h-1/2 rounded-xl border-2  border-black" />
+				<img
+					src={iv_calculator}
+					alt="Welcome"
+					class=" mx-auto w-2/5 h-1/2 rounded-xl border-2 border-black"
+				/>
 			</picture>
 		</a>
 		<a rel="stylesheet" href="/pokemon-stats">
 			<picture class="">
-				<img src={pokemon_stats} alt="Welcome" class=" mx-auto w-2/5 h-1/2 rounded-xl border-2  border-black" />
+				<img
+					src={pokemon_stats}
+					alt="Welcome"
+					class=" mx-auto w-2/5 h-1/2 rounded-xl border-2 border-black"
+				/>
 			</picture>
 		</a>
 	</div>

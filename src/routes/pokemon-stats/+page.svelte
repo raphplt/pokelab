@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { apiData, pokemonNames, pokemonStats , cpMax} from '../iv-calculator/store';
+	import { apiData, pokemonNames, pokemonStats, pokemonMaxCp } from '../iv-calculator/store';
 
 	import logo_sword from '$lib/images/logo_sword.png';
 	import logo_pv from '$lib/images/logo_pv.png';
@@ -27,11 +27,14 @@
 
 	// Nom du Pokémon sélectionné
 	let choosenPokemon = 'Choisir un Pokémon';
-
 </script>
 
+<svelte:head>
+	<title>Pokelab | Pokémon Stats</title>
+	<meta name="description" content="Obtenir des informations sur vos Pokémon favoris" />
+</svelte:head>
+
 <section class="h-[100vh]">
-    { JSON.stringify($cpMax)}
 	<!-- {#if iv > 0} -->
 	<div id="base_stats" class="mt-23 text-center mb-24 mt-24">
 		<div
@@ -48,19 +51,35 @@
 		>
 			<option selected disabled>Choisir un Pokémon</option>
 
-			<!-- <option selected disabled>Choisir un Pokémon</option> -->
 			{#each $pokemonNames as pokemon}
 				<option class="pl-2 text-slate-500 left-8">{pokemon.pokemonName}</option>
 			{/each}
 		</select>
 		<div class="mt-12" />
-		{#if choosenPokemon}
+		{#if choosenPokemon !== 'Choisir un Pokémon'}
 			{#each $pokemonStats as pokemon}
-				{#if pokemon.pokemonName == choosenPokemon}
+				{#if pokemon.pokemonName === choosenPokemon}
 					<div
 						class="flex gap-5 w-3/4 mx-auto flex-col justify-center bg-slate-100 py-8 px-20 rounded-lg drop-shadow-md"
 					>
-						<h2 class="text-lg font-semibold">{choosenPokemon}</h2>
+						<div class="flex justify-center items-center gap-10">
+							<h2 class="text-lg font-semibold">{choosenPokemon}</h2>
+							<img
+								src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+								alt="Pokémon logo"
+								class="w-[10%]"
+							/>
+						</div>
+
+						{#each $pokemonMaxCp as cp}
+							{#if cp.pokemonName == choosenPokemon}
+								<div
+									class="flex gap-5 w-3/4 mx-auto flex-col justify-center bg-slate-100 py-8 px-20 rounded-lg drop-shadow-md"
+								>
+									cpMax : {cp.maxCp}
+								</div>
+							{/if}
+						{/each}
 						<div class="mx-auto w-fit">
 							<h3 class="mb-2">Attaque :</h3>
 							<div class="flex gap-5 justify-center items-center">
@@ -101,12 +120,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- {#break} -->
 				{/if}
 			{/each}
 		{/if}
 		<!-- {/if} -->
-
 		<div />
 		<!-- {#if iv > 0} -->
 	</div>
