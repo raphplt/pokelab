@@ -2,6 +2,7 @@ import { writable, derived } from 'svelte/store';
 
 export const apiData = writable({});
 export const cpMax: any = writable({});
+// export const pokemonListFr = 
 
 async function fetchPokemonData() {
 	try {

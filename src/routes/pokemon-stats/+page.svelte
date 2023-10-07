@@ -56,6 +56,7 @@
 			{/each}
 		</select>
 		<div class="mt-12" />
+		{$pokemonStats.length}
 		{#if choosenPokemon !== 'Choisir un Pokémon'}
 			{#each $pokemonStats as pokemon}
 				{#if pokemon.pokemonName === choosenPokemon}

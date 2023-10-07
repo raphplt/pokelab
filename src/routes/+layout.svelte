@@ -16,6 +16,10 @@
 				<p>
 					© {new Date().getFullYear()} - PokéLab
 				</p>
+				<p>
+					© Pokémon et tous les noms respectifs sont des marques déposées de The Pokémon Company
+					International, Game Freak et Nintendo.
+				</p>
 				<ul class="flex space-x-4">
 					<li><a href="/" class="text-blue-500 hover:underline">Accueil</a></li>
 					<li><a href="/iv-calculator" class="text-blue-500 hover:underline">IV Calculator</a></li>
