@@ -16,6 +16,7 @@
 				<p>
 					© {new Date().getFullYear()} - PokéLab
 				</p>
+
 				<p>
 					© Pokémon et tous les noms respectifs sont des marques déposées de The Pokémon Company
 					International, Game Freak et Nintendo.

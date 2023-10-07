@@ -2,7 +2,8 @@ import { writable, derived } from 'svelte/store';
 
 export const apiData = writable({});
 export const cpMax: any = writable({});
-// export const pokemonListFr = 
+export const pokemonListFr = writable({});
+export const fastMoves = writable([]);
 
 async function fetchPokemonData() {
 	try {
@@ -42,8 +43,48 @@ async function fetchCpMax() {
 	}
 }
 
+async function fetchPokemonListFr() {
+	try {
+		const cachedData = localStorage.getItem('pokemon_list_fr');
+		if (cachedData) {
+			pokemonListFr.set(JSON.parse(cachedData));
+		} else {
+			const response = await fetch('https://api-pokemon-fr.vercel.app/api/v1/pokemon');
+
+			const data = await response.json();
+
+			pokemonListFr.set(data);
+
+			localStorage.setItem('pokemon_list_fr', JSON.stringify(data));
+		}
+	} catch (error) {
+		console.error('Error fetching Pokemon list fr:', error);
+	}
+}
+
+async function fetchFastMoves() {
+	try {
+		const cachedData = localStorage.getItem('fast_moves');
+		if (cachedData) {
+			fastMoves.set(JSON.parse(cachedData));
+		} else {
+			const response = await fetch('https://pogoapi.net/api/v1/fast_moves.json');
+
+			const data = await response.json();
+
+			fastMoves.set(data);
+
+			localStorage.setItem('fast_moves', JSON.stringify(data));
+		}
+	} catch (error) {
+		console.error('Error fetching Fast Moves:', error);
+	}
+}
+
 fetchPokemonData();
 fetchCpMax();
+fetchPokemonListFr();
+fetchFastMoves();
 
 export const pokemonNames: any = derived(apiData, ($apiData) => {
 	const pokemonArray = Object.values($apiData);
@@ -99,4 +140,46 @@ export const pokemonMaxCp: any = derived(cpMax, ($cpMax) => {
 	}, {});
 
 	return Object.values(uniquePokemonMap as any);
+});
+
+export const pokeDataFR: any = derived(pokemonListFr, ($pokemonListFr) => {
+	const pokemonArray = Object.values($pokemonListFr as any);
+	const filteredPokemonArray = pokemonArray.map((pokemon: any) => {
+		const { pokedexId: id, generation, category, name, sprites, types, stats, evolution } = pokemon;
+
+		const frenchName = name.fr || '';
+		const regularSprite = sprites.regular || '';
+		const shinySprite = sprites.shiny || '';
+
+		return {
+			id,
+			generation,
+			category,
+			frenchName,
+			regularSprite,
+			shinySprite,
+			types,
+			stats,
+			evolution
+		};
+	});
+
+	return filteredPokemonArray;
+});
+
+export const fastMovesList: any = derived(fastMoves, ($fastMoves) => {
+	const fastMovesArray = Object.values($fastMoves as any);
+	const uniqueFastMovesMap = fastMovesArray.reduce((map: any, fastMove: any) => {
+		map[fastMove.name] = {
+			stamina_loss_scaler: fastMove.stamina_loss_scaler,
+			name: fastMove.name,
+			power: fastMove.power,
+			duration: fastMove.duration,
+			energy_delta: fastMove.energy_delta,
+			type: fastMove.type
+		};
+		return map;
+	}, {});
+
+	return Object.values(uniqueFastMovesMap as any);
 });
