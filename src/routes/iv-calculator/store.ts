@@ -4,6 +4,7 @@ export const apiData = writable({});
 export const cpMax: any = writable({});
 export const pokemonListFr = writable({});
 export const fastMoves = writable([]);
+export const pokemonMoves = writable([]);
 
 async function fetchPokemonData() {
 	try {
@@ -81,10 +82,30 @@ async function fetchFastMoves() {
 	}
 }
 
+async function fetchPokemonMoves() {
+	try {
+		const cachedData = localStorage.getItem('pokemon_moves');
+		if (cachedData) {
+			pokemonMoves.set(JSON.parse(cachedData));
+		} else {
+			const response = await fetch('https://pogoapi.net/api/v1/current_pokemon_moves.json');
+
+			const data = await response.json();
+
+			pokemonMoves.set(data);
+
+			localStorage.setItem('pokemon_moves', JSON.stringify(data));
+		}
+	} catch (error) {
+		console.error('Error fetching Pokemon Moves:', error);
+	}
+}
+
 fetchPokemonData();
 fetchCpMax();
 fetchPokemonListFr();
 fetchFastMoves();
+fetchPokemonMoves();
 
 export const pokemonNames: any = derived(apiData, ($apiData) => {
 	const pokemonArray = Object.values($apiData);
@@ -182,4 +203,20 @@ export const fastMovesList: any = derived(fastMoves, ($fastMoves) => {
 	}, {});
 
 	return Object.values(uniqueFastMovesMap as any);
+});
+
+export const pokemonMovesList: any = derived(pokemonMoves, ($pokemonMoves) => {
+	const pokemonMovesArray = Object.values($pokemonMoves as any);
+	const uniquePokemonMovesMap = pokemonMovesArray.reduce((map: any, pokemonMove: any) => {
+		map[pokemonMove.pokemon_name] = {
+			charged_moves: pokemonMove.charged_moves,
+			elite_charged_moves: pokemonMove.elite_charged_moves,
+			fast_moves: pokemonMove.fast_moves,
+			elite_fast_moves: pokemonMove.elite_fast_moves,
+			pokemon_id: pokemonMove.pokemon_id
+		};
+		return map;
+	}, {});
+
+	return Object.values(uniquePokemonMovesMap as any);
 });

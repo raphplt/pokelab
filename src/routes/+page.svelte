@@ -10,7 +10,7 @@
 	<meta name="description" content="Pokélab Pokémon GO" />
 </svelte:head>
 
-<section class=" bg-blue-400 flex flex-row justify-center items-center w-full pt-12 pb-36">
+<section class=" bg-blue-400 flex flex-row justify-center items-center w-full pt-12 pb-36 h-[100vh]">
 	<div class="w-1/2 ml-28">
 		<h1 class="text-7xl">Poké Lab</h1>
 		<h2 class="text-2xl mt-2">Maximisez votre aventure Pokémon GO avec nos outils</h2>
