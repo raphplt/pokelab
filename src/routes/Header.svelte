@@ -28,6 +28,10 @@
 			};
 		}
 	});
+		function closeMenu() {
+		showMenu.set(false);
+	}
+
 </script>
 
 <header
@@ -38,7 +42,7 @@
 			href="/"
 			class="hover:underline hover:font-semibold underline-offset-2 flex items-center flex-col gap-1"
 		>
-			<a href="/" class="w-1/12 h-1/12 block cursor-pointer ml-6">
+			<a href="/" class="w-1/12 h-1/12 block cursor-pointer ml-6" on:click={closeMenu}>
 				<img src={pokeball} alt="home" />
 			</a>
 		</a>
@@ -68,13 +72,13 @@
 			class="flex gap-20 text-xl sm:text-[16px] bg-blue-800 sm:gap-20 sm:flex-row flex-col h-[100vh] sm:h-fit w-[100wv] items-center sm:items-start"
 		>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/" class="font-semibold">Accueil</a>
+				<a href="/" class="font-semibold" on:click={closeMenu}>Accueil</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/pokemon-stats" class="font-semibold">Pokémon stats</a>
+				<a href="/pokemon-stats" class="font-semibold" on:click={closeMenu}>Pokémon stats</a>
 			</li>
 			<li aria-current={$page.url.pathname.startsWith('/iv-calculator') ? 'page' : undefined}>
-				<a href="/iv-calculator" class="font-semibold">Iv calculator</a>
+				<a href="/iv-calculator" class="font-semibold" on:click={closeMenu}>Iv calculator</a>
 			</li>
 		</div>
 	{/if}
