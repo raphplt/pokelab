@@ -47,14 +47,14 @@
 	<meta name="description" content="Calculateur d'IV Pokémon GO" />
 </svelte:head>
 
-<section class="">
-	<h1 class="text-2xl text-center mt-6 py-4">Bienvenue sur le calculateur d'IV pokémon !</h1>
-	<h2 class="text-center text-xl py-3 pb-8">
+<section class="mt-20">
+	<h1 class="text-xl sm:text-2xl text-center mt-6 py-4 w-3/4 mx-auto">Bienvenue sur le calculateur d'IV pokémon !</h1>
+	<h2 class="text-center text-lh sm:text-xl py-3 pb-4 sm:pb-8 w-4/5 mx-auto">
 		Vous pouvez ici calculer les IV de votre pokémon en fonction de ses statistiques.
 	</h2>
 
 	<div
-		class="w-2/5 mx-auto flex gap-10 flex-col justify-center bg-slate-100 py-8 px-20 rounded-lg drop-shadow-md"
+		class="w-11/12 sm:w-2/5 mx-auto flex gap-5 sm:gap-10 flex-col justify-center bg-slate-100 py-8 sm:px-20 px-1 rounded-lg drop-shadow-md"
 	>
 		<div>
 			<h3 class="mb-2">Attaque : {attack}</h3>
@@ -69,7 +69,7 @@
 			<IvBar attack={null} stamina={null} bind:hp />
 		</div>
 	</div>
-	<div class="flex mt-12 mb-6 justify-center">
+	<div class="flex mt-6 sm:mt-12 mb-6 justify-center">
 		<button
 			on:click={() => resetIV()}
 			class="rounded-2xl bg-[#EF4444] hover:bg-[#a14242] text-white w-fit py-1 px-6 text-lg mr-4"
@@ -85,7 +85,7 @@
 			Calculer les IV
 		</button>
 	</div>
-	<div class="rounded-lg mx-auto w-fit px-4 py-2 h-[20vh]">
+	<div class="rounded-lg mx-auto w-fit px-4 py-2 h-[40vh] sm:h-[20vh]">
 		{#if iv == 100}
 			<div
 				class=" bg-yellow-400 py-3 px-6 drop-shadow-md rounded-xl flex flex-col items-center justify-center"
@@ -143,11 +143,11 @@
 		{/if}
 	</div>
 </section>
-<section class="w-2/3 mx-auto">
+<section class="w-10/12 sm:w-2/3 mx-auto">
 	<div
 		class="text-2xl flex items-center gap-3 mb-6 mx-auto bg-blue-300 py-3 rounded-2xl text-left pl-8"
 	>
-		<img src={question_mark} alt="stats" class="w-[2%] inline-block" />
+		<img src={question_mark} alt="stats" class="w-1/12 sm:w-[2%] inline-block" />
 		Qu'est ce que les IV ?
 	</div>
 	<p class="mx-auto pb-6 text-justify">
@@ -169,12 +169,12 @@
 		endurance. Un Pikachu parfait aurait toutes ces statistiques augmentées de 15.
 	</p>
 </section>
-<section class="w-2/3 mx-auto">
+<section class="w-10/12 sm:w-2/3 mx-auto">
 	<div id="base_stats" class="mt-23 text-center mb-24 mt-24">
 		<div
 			class="text-2xl flex items-center gap-3 mb-6 mx-auto bg-blue-300 py-3 rounded-2xl text-left pl-8"
 		>
-			<img src={stats} alt="stats" class="w-[2%] inline-block" />
+			<img src={stats} alt="stats" class="w-1/12 sm:w-[2%] inline-block" />
 			Statistiques de base
 		</div>
 
