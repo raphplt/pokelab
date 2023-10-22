@@ -201,8 +201,9 @@
 			individu, ce qui en fait un aspect clé de la stratégie de jeu dans Pokémon GO.
 		</p>
 
-		<a class="mx-auto w-fit py-4 px-8 bg-blue-600 hover:bg-blue-500 text-white rounded-xl" href="/pokemon-stats"
-			>Voir les statistiques de base</a
+		<a
+			class="mx-auto w-fit py-4 px-8 bg-blue-600 hover:bg-blue-500 text-white rounded-xl"
+			href="/pokemon-stats">Voir les statistiques de base</a
 		>
 		<div />
 	</div>
