@@ -1,6 +1,5 @@
 <script>
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+
 	import iv_calculator from '$lib/images/iv_calculator.jpg';
 	import pokemon_stats from '$lib/images/pokemon_stats.jpg';
 </script>

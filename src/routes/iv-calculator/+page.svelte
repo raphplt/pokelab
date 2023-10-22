@@ -1,11 +1,7 @@
 <script>
 	import IvBar from '../../components/+iv_bar.svelte';
-	import arrow_down from '$lib/images/arrow_down.png';
 	import { onMount } from 'svelte';
-	import { apiData, pokemonNames, pokemonStats } from './store';
-	import logo_sword from '$lib/images/logo_sword.png';
-	import logo_pv from '$lib/images/logo_pv.png';
-	import logo_stamina from '$lib/images/logo_stamina.png';
+	import { apiData } from './store';
 	import stats from '$lib/images/stats.png';
 	import question_mark from '$lib/images/question_mark.png';
 	import Appraisal_Rating_0 from '$lib/images/Appraisal_Rating_0.webp';
