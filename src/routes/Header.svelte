@@ -9,7 +9,7 @@
 	</a>
 
 	<nav class="">
-		<ul class="flex gap-12 font-semibold text-lg">
+		<ul class="flex sm:gap-12 font-semibold text-md sm:text-lg">
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Accueil</a>
 			</li>
