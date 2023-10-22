@@ -246,7 +246,7 @@
 							{/each}
 						</div>
 					</div>
-					<div class="flex items-center flex-row sm:flex-col justify-between">
+					<div class="flex items-center sm:flex-row flex-col justify-between">
 						<div class="">
 							{#each $pokeDataFR as pokemon}
 								{#if pokemon.id == $choosenPokemon.pokemonId}
