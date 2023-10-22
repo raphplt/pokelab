@@ -41,7 +41,25 @@
 		if (hp != null) {
 			hp = score;
 		}
+
+		if (score == 15) {
+			color = '#E18079';
+		}
 	}
+
+	const setScoreNull = () => {
+		if (score == 0) score = 1;
+		else score = 0;
+		if (attack != null) {
+			attack = score;
+		}
+		if (stamina != null) {
+			stamina = score;
+		}
+		if (hp != null) {
+			hp = score;
+		}
+	};
 
 	/**
 	 * @param {number} number
@@ -53,7 +71,7 @@
 
 <div class="h-6 mx-auto rounded-3xl bg-[#EEEEEE] flex justify-center gap-[1px]">
 	<button
-		on:click={() => setScore(1)}
+		on:click={() => setScoreNull()}
 		class={`${style} rounded-l-xl`}
 		style={`${score >= 1 ? `background-color: ${color}` : `background-color: "#CBD5E1"`}`}
 	/>

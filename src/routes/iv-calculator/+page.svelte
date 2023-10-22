@@ -8,6 +8,11 @@
 	import logo_stamina from '$lib/images/logo_stamina.png';
 	import stats from '$lib/images/stats.png';
 	import question_mark from '$lib/images/question_mark.png';
+	import Appraisal_Rating_0 from '$lib/images/Appraisal_Rating_0.webp';
+	import Appraisal_Rating_1 from '$lib/images/Appraisal_Rating_1.webp';
+	import Appraisal_Rating_2 from '$lib/images/Appraisal_Rating_2.webp';
+	import Appraisal_Rating_3 from '$lib/images/Appraisal_Rating_3.webp';
+	import Appraisal_Rating_4 from '$lib/images/Appraisal_Rating_4.webp';
 
 	async function loadData() {
 		const unsubscribe = apiData.subscribe(($apiData) => {
@@ -21,20 +26,6 @@
 	}
 
 	loadData();
-
-	// Bests base stats
-	const bestAttack = 300;
-	const bestStamina = 278;
-	const bestDefense = 487;
-
-	// Nom du Pokémon sélectionné
-	let choosenPokemon = 'Choisir un Pokémon';
-	// Eviter les doublons :
-	let foundPokemon = false;
-
-	function found() {
-		foundPokemon = true;
-	}
 
 	// Statistiques d'IV  d'attaque, défense et PV
 	let attack = 0;
@@ -98,64 +89,61 @@
 			Calculer les IV
 		</button>
 	</div>
-	<div class="mt-10 rounded-lg mx-auto w-fit h-96">
+	<div class="rounded-lg mx-auto w-fit px-4 py-2 h-[20vh]">
 		{#if iv == 100}
-			<div class="bg-yellow-400 py-3 px-6 drop-shadow-md rounded-xl border-yellow-600 border-2">
-				<h2 class="text-2xl text-center mb-2">
-					{iv}% IV
-				</h2>
-				<p class="text-lg text-center">Votre pokémon est parfait !</p>
-			</div>
-		{/if}
-		{#if iv > 80 && iv < 100}
-			<div class="bg-green-400 py-3 px-6 drop-shadow-md rounded-xl border-2">
-				<h2 class="text-2xl text-center mb-2">
-					{iv}% IV
-				</h2>
-				<p class="text-lg text-center">Votre pokémon est excellent !</p>
-			</div>
-		{/if}
-		{#if iv > 60 && iv <= 80}
-			<div class="bg-green-300 py-3 px-6 drop-shadow-md rounded-xl border-2">
-				<h2 class="text-2xl text-center mb-2">
-					{iv}% IV
-				</h2>
-				<p class="text-lg text-center">Votre pokémon est très bon !</p>
-			</div>
-		{/if}
-		{#if iv > 40 && iv <= 60}
-			<div class="bg-yellow-200 py-3 px-6 drop-shadow-md rounded-xl border-2">
-				<h2 class="text-2xl text-center mb-2">
-					{iv}% IV
-				</h2>
-				<p class="text-lg text-center">Votre pokémon est bon !</p>
-			</div>
-		{/if}
-		{#if iv > 20 && iv <= 40}
-			<div class="bg-orange-400 py-3 px-6 drop-shadow-md rounded-xl border-2">
-				<h2 class="text-2xl text-center mb-2">
-					{iv}% IV
-				</h2>
-				<p class="text-lg text-center">Votre pokémon est médiocre !</p>
-			</div>
-		{/if}
-		{#if iv > 0 && iv <= 20}
-			<div class="bg-red-400 py-3 px-6 drop-shadow-md rounded-xl border-2">
-				<h2 class="text-2xl text-center mb-2">
-					{iv}% IV
-				</h2>
-				<p class="text-lg text-center">Votre pokémon est mauvais !</p>
-			</div>
-		{/if}
-
-		{#if iv > 0}
-			<a
-				href="#base_stats"
-				class="flex items-center mt-32 mb-4 justify-center mx-auto flex-col gap-5"
+			<div
+				class=" bg-yellow-400 py-3 px-6 drop-shadow-md rounded-xl flex flex-col items-center justify-center"
 			>
-				<p class="text-center text-lg">Plus de statistiques</p>
-				<img src={arrow_down} alt="arrow" class=" mx-auto w-[20%] animate-bounce" />
-			</a>
+				<p class="font-semibold text-xl">
+					{iv} %
+				</p>
+				<p class="text-lg text-center mb-1">Votre pokémon est parfait !</p>
+				<img src={Appraisal_Rating_4} alt="Perfect IV" class="w-1/2" />
+			</div>
+		{/if}
+		{#if iv >= 82 && iv < 98}
+			<div
+				class=" bg-green-400 py-3 px-6 drop-shadow-md rounded-xl flex flex-col items-center justify-center"
+			>
+				<p class="font-semibold text-xl">
+					{iv} %
+				</p>
+				<p class="text-lg text-center mb-1">Votre pokémon est excellent !</p>
+				<img src={Appraisal_Rating_3} alt="Excellent IV" class="w-1/2" />
+			</div>
+		{/if}
+		{#if iv >= 67 && iv < 82}
+			<div
+				class=" bg-green-200 py-3 px-6 drop-shadow-md rounded-xl flex flex-col items-center justify-center"
+			>
+				<p class="font-semibold text-xl">
+					{iv} %
+				</p>
+				<p class="text-lg text-center mb-1">Votre pokémon est bon !</p>
+				<img src={Appraisal_Rating_2} alt="Good IV" class="w-1/2" />
+			</div>
+		{/if}
+		{#if iv >= 51 && iv < 67}
+			<div
+				class=" bg-yellow-200 py-3 px-6 drop-shadow-md rounded-xl flex flex-col items-center justify-center"
+			>
+				<p class="font-semibold text-xl">
+					{iv} %
+				</p>
+				<p class="text-lg text-center mb-1">Votre pokémon est correct !</p>
+				<img src={Appraisal_Rating_1} alt="Correct IV" class="w-1/2" />
+			</div>
+		{/if}
+		{#if iv >= 1 && iv < 51}
+			<div
+				class=" bg-red-200 py-3 px-6 drop-shadow-md rounded-xl flex flex-col items-center justify-center"
+			>
+				<p class="font-semibold text-xl">
+					{iv} %
+				</p>
+				<p class="text-lg text-center mb-1">Votre pokémon est mauvais !</p>
+				<img src={Appraisal_Rating_0} alt="Bad IV" class="w-1/2" />
+			</div>
 		{/if}
 	</div>
 </section>
@@ -166,7 +154,7 @@
 		<img src={question_mark} alt="stats" class="w-[2%] inline-block" />
 		Qu'est ce que les IV ?
 	</div>
-	<p class=" mx-auto">
+	<p class="mx-auto pb-6 text-justify">
 		Dans Pokémon GO, les Individual Values, ou IV, sont similaires aux jeux principaux. Ils sont
 		essentiels pour évaluer le potentiel de votre Pokémon. Contrairement aux jeux traditionnels, il
 		existe seulement trois IV dans Pokémon GO, à savoir les Points de Vie (PV), l'Attaque et la
@@ -174,17 +162,18 @@
 		Points de Combat (PC) et reflètent toutes les caractéristiques de votre Pokémon. Par conséquent,
 		un Pokémon peut présenter des IV de 0-0-0 ou 15-15-15. Lorsqu'un Pokémon a des IV parfaits
 		(c'est-à-dire 15-15-15), cela signifie qu'il a atteint 100% de son potentiel en IV, avec un
-		total de 45 pour ces trois statistiques combinées. <br /> <br />
-		Tandis que les IVs jouent un rôle crucial pour rechercher un Pokémon compétitif, il est indéniable
-		que les statistiques de base revêtent une importance plus objective. Chaque espèce de Pokémon possède
-		des statistiques de base qui sont réparties dans les trois catégories mentionnées précédemment. Les
-		statistiques de base demeurent constantes pour chaque espèce de Pokémon. Par exemple, prenons Pikachu,
-		qui a une base de 112 en attaque, 96 en défense et 111 en endurance. Un Pikachu parfait aurait toutes
-		ces statistiques augmentées de 15.
+		total de 45 pour ces trois statistiques combinées.
+	</p>
+	<p class="mx-auto text-justify">
+		Tandis que les IVs jouent un rôle crucial pour rechercher un Pokémon compétitif, il est
+		indéniable que les statistiques de base revêtent une importance plus objective. Chaque espèce de
+		Pokémon possède des statistiques de base qui sont réparties dans les trois catégories
+		mentionnées précédemment. Les statistiques de base demeurent constantes pour chaque espèce de
+		Pokémon. Par exemple, prenons Pikachu, qui a une base de 112 en attaque, 96 en défense et 111 en
+		endurance. Un Pikachu parfait aurait toutes ces statistiques augmentées de 15.
 	</p>
 </section>
 <section class="w-2/3 mx-auto">
-	<!-- {#if iv > 0} -->
 	<div id="base_stats" class="mt-23 text-center mb-24 mt-24">
 		<div
 			class="text-2xl flex items-center gap-3 mb-6 mx-auto bg-blue-300 py-3 rounded-2xl text-left pl-8"
@@ -192,74 +181,33 @@
 			<img src={stats} alt="stats" class="w-[2%] inline-block" />
 			Statistiques de base
 		</div>
-		<h3 class="text-left mx-auto w-2/3">Veuillez sélectionner un Pokémon</h3>
-		<select
-			id="underline_select"
-			bind:value={choosenPokemon}
-			class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/3 mx-auto mt-4 p-2.5"
+
+		<p class="mx-auto pb-6 text-justify">
+			Les statistiques de base dans Pokémon GO sont fondamentales pour comprendre la force
+			intrinsèque de chaque espèce de Pokémon. Elles déterminent la manière dont un Pokémon évoluera
+			et performera au combat. Ces statistiques sont réparties en trois catégories clés : l'Attaque,
+			la Défense, et l'Endurance. L'Attaque est la statistique qui influence la puissance des
+			attaques de votre Pokémon, la Défense réduit les dégâts subis lorsqu'il est attaqué, et
+			l'Endurance détermine la quantité de points de vie (PV) du Pokémon. Ces valeurs de base sont
+			spécifiques à chaque espèce de Pokémon et ne changent pas d'un individu à l'autre de la même
+			espèce. Cela signifie que tous les Pikachu auront les mêmes statistiques de base, soit 112 en
+			Attaque, 96 en Défense, et 111 en Endurance.
+		</p>
+		<p class="mx-auto pb-12 text-justify">
+			Comprendre les statistiques de base est essentiel pour optimiser les performances de votre
+			équipe Pokémon. Par exemple, si vous recherchez un Pokémon pour être votre attaquant
+			principal, vous voudrez privilégier une espèce avec une statistique d'Attaque élevée. De même,
+			si vous cherchez un défenseur robuste pour les arènes, les statistiques de Défense et
+			d'Endurance seront cruciales. Les joueurs expérimentés en Pokémon GO cherchent à équilibrer
+			ces statistiques de base avec les IV de leurs Pokémon pour créer une équipe de combat
+			puissante et compétitive. En somme, les statistiques de base définissent la base de chaque
+			Pokémon, tandis que les IV permettent de personnaliser davantage les capacités de chaque
+			individu, ce qui en fait un aspect clé de la stratégie de jeu dans Pokémon GO.
+		</p>
+
+		<a class="mx-auto w-fit py-4 px-8 bg-blue-600 hover:bg-blue-500 text-white rounded-xl" href="/pokemon-stats"
+			>Voir les statistiques de base</a
 		>
-			<option selected disabled>Choisir un Pokémon</option>
-
-			<!-- <option selected disabled>Choisir un Pokémon</option> -->
-			{#each $pokemonNames as pokemon}
-				<option class="pl-2 text-slate-500 left-8">{pokemon.pokemonName}</option>
-			{/each}
-		</select>
-		<div class="mt-12" />
-		{#if choosenPokemon}
-			{#each $pokemonStats as pokemon}
-				{#if pokemon.pokemonName == choosenPokemon}
-					<div
-						class="flex gap-5 w-3/4 mx-auto flex-col justify-center bg-slate-100 py-8 px-20 rounded-lg drop-shadow-md"
-					>
-						<h2 class="text-lg font-semibold">{choosenPokemon}</h2>
-						<div class="mx-auto w-fit">
-							<h3 class="mb-2">Attaque :</h3>
-							<div class="flex gap-5 justify-center items-center">
-								<img src={logo_sword} alt="attack" class="w-[5%]" />
-								<div class="w-48 h-2 bg-slate-200 rounded-lg">
-									<div
-										class={`h-2 w-fit bg-orange-500 rounded-lg`}
-										style={`width: ${(pokemon.baseAttack / bestAttack) * 200}px`}
-									/>
-								</div>
-								{pokemon.baseAttack}
-							</div>
-						</div>
-						<div class="mx-auto w-fit">
-							<h3 class="mb-2">PV :</h3>
-							<div class="flex gap-5 justify-center items-center">
-								<img src={logo_pv} alt="attack" class="w-[5%]" />
-								<div class="w-48 h-2 bg-slate-200 rounded-lg">
-									<div
-										class={`h-2 w-fit bg-orange-500 rounded-lg`}
-										style={`width: ${(pokemon.baseDefense / bestDefense) * 200}px`}
-									/>
-								</div>
-								{pokemon.baseDefense}
-							</div>
-						</div>
-						<div class="mx-auto w-fit">
-							<h3 class="mb-2">Stamina :</h3>
-							<div class="flex gap-5 justify-center items-center">
-								<img src={logo_stamina} alt="attack" class="w-[5%]" />
-								<div class="w-48 h-2 bg-slate-200 rounded-lg">
-									<div
-										class={`h-2 w-fit bg-orange-500 rounded-lg`}
-										style={`width: ${(pokemon.baseStamina / bestStamina) * 200}px`}
-									/>
-								</div>
-								{pokemon.baseStamina}
-							</div>
-						</div>
-					</div>
-					<!-- {#break} -->
-				{/if}
-			{/each}
-		{/if}
-		<!-- {/if} -->
-
 		<div />
-		<!-- {#if iv > 0} -->
 	</div>
 </section>

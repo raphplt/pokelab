@@ -4,7 +4,9 @@ export const apiData = writable({});
 export const cpMax: any = writable({});
 export const pokemonListFr = writable({});
 export const fastMoves = writable([]);
+export const chargedMoves = writable([]);
 export const pokemonMoves = writable([]);
+export const types = writable([]);
 
 async function fetchPokemonData() {
 	try {
@@ -82,6 +84,25 @@ async function fetchFastMoves() {
 	}
 }
 
+async function fetchChargedMoves() {
+	try {
+		const cachedData = localStorage.getItem('charged_moves');
+		if (cachedData) {
+			chargedMoves.set(JSON.parse(cachedData));
+		} else {
+			const response = await fetch('https://pogoapi.net/api/v1/charged_moves.json');
+
+			const data = await response.json();
+
+			chargedMoves.set(data);
+
+			localStorage.setItem('charged_moves', JSON.stringify(data));
+		}
+	} catch (error) {
+		console.error('Error fetching Charged Moves:', error);
+	}
+}
+
 async function fetchPokemonMoves() {
 	try {
 		const cachedData = localStorage.getItem('pokemon_moves');
@@ -101,11 +122,32 @@ async function fetchPokemonMoves() {
 	}
 }
 
+async function fetchTypes() {
+	try {
+		const cachedData = localStorage.getItem('types');
+		if (cachedData) {
+			types.set(JSON.parse(cachedData));
+		} else {
+			const response = await fetch('https://api-pokemon-fr.vercel.app/api/v1/types');
+
+			const data = await response.json();
+
+			types.set(data);
+
+			localStorage.setItem('types', JSON.stringify(data));
+		}
+	} catch (error) {
+		console.error('Error fetching Types:', error);
+	}
+}
+
 fetchPokemonData();
 fetchCpMax();
 fetchPokemonListFr();
 fetchFastMoves();
+fetchChargedMoves();
 fetchPokemonMoves();
+fetchTypes();
 
 export const pokemonNames: any = derived(apiData, ($apiData) => {
 	const pokemonArray = Object.values($apiData);
@@ -205,6 +247,23 @@ export const fastMovesList: any = derived(fastMoves, ($fastMoves) => {
 	return Object.values(uniqueFastMovesMap as any);
 });
 
+export const chargedMovesList: any = derived(chargedMoves, ($chargedMoves) => {
+	const chargedMovesArray = Object.values($chargedMoves as any);
+	const uniqueChargedMovesMap = chargedMovesArray.reduce((map: any, chargedMove: any) => {
+		map[chargedMove.name] = {
+			stamina_loss_scaler: chargedMove.stamina_loss_scaler,
+			name: chargedMove.name,
+			power: chargedMove.power,
+			duration: chargedMove.duration,
+			energy_delta: chargedMove.energy_delta,
+			type: chargedMove.type
+		};
+		return map;
+	}, {});
+
+	return Object.values(uniqueChargedMovesMap as any);
+});
+
 export const pokemonMovesList: any = derived(pokemonMoves, ($pokemonMoves) => {
 	const pokemonMovesArray = Object.values($pokemonMoves as any);
 	const uniquePokemonMovesMap = pokemonMovesArray.reduce((map: any, pokemonMove: any) => {
@@ -219,4 +278,19 @@ export const pokemonMovesList: any = derived(pokemonMoves, ($pokemonMoves) => {
 	}, {});
 
 	return Object.values(uniquePokemonMovesMap as any);
+});
+
+export const typesList: any = derived(types, ($types) => {
+	const typesArray = Object.values($types as any);
+	const uniqueTypesMap = typesArray.reduce((map: any, type: any) => {
+		map[type.name.fr] = {
+			name: type.name,
+			id: type.id,
+			sprites: type.sprites,
+			resistances: type.strongAgainst
+		};
+		return map;
+	}, {});
+
+	return Object.values(uniqueTypesMap as any);
 });
