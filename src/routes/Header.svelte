@@ -29,6 +29,10 @@
 		}
 	});
 		function closeMenu() {
+			if (
+				typeof window !== 'undefined' &&
+				window.innerWidth < 640
+			)
 		showMenu.set(false);
 	}
 
