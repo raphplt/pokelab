@@ -4,10 +4,13 @@
 	import Header from './Header.svelte';
 	import '../app.css';
 	import pokeball from '$lib/images/pokeball.png';
+	import Analytics from "$lib/analytics/+page.svelte";
 </script>
 
 <div class="app">
 	<Header />
+
+	<Analytics />
 
 	<main>
 		<slot />
