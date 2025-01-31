@@ -23,7 +23,7 @@
 				<h1 class="text-md sm:text-lg mt-4">Maximisez votre aventure Pokémon GO avec nos outils</h1>
 			</Typewriter>
 		</div>
-		>
+		
 	</div>
 	<div class="flex flex-col items-center flex-1 w-1/2 gap-y-5">
 		<a rel="stylesheet" href="/pokemon-stats">
