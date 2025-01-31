@@ -48,7 +48,9 @@
 </svelte:head>
 
 <section class="mt-20">
-	<h1 class="text-xl sm:text-2xl text-center mt-6 py-4 w-3/4 mx-auto">Bienvenue sur le calculateur d'IV pokémon !</h1>
+	<h1 class="text-xl sm:text-2xl text-center mt-6 py-4 w-3/4 mx-auto">
+		Bienvenue sur le calculateur d'IV pokémon !
+	</h1>
 	<h2 class="text-center text-lh sm:text-xl py-3 pb-4 sm:pb-8 w-4/5 mx-auto">
 		Vous pouvez ici calculer les IV de votre pokémon en fonction de ses statistiques.
 	</h2>

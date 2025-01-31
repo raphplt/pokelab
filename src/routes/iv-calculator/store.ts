@@ -7,6 +7,8 @@ export const fastMoves = writable([]);
 export const chargedMoves = writable([]);
 export const pokemonMoves = writable([]);
 export const types = writable([]);
+export const candyToEvolve = writable({});
+export const encounterData = writable([]);
 
 async function fetchPokemonData() {
 	try {
@@ -19,8 +21,6 @@ async function fetchPokemonData() {
 			const data = await response.json();
 
 			apiData.set(data);
-
-			localStorage.setItem('pokemon_data', JSON.stringify(data));
 		}
 	} catch (error) {
 		console.error('Error fetching Pokemon data:', error);
@@ -49,19 +49,17 @@ async function fetchCpMax() {
 async function fetchPokemonListFr() {
 	try {
 		const cachedData = localStorage.getItem('pokemon_list_fr');
-		if (cachedData) {
+		if (cachedData && cachedData !== 'undefined' && cachedData.length > 0) {
 			pokemonListFr.set(JSON.parse(cachedData));
 		} else {
-			const response = await fetch('https://api-pokemon-fr.vercel.app/api/v1/pokemon');
-
+			const response = await fetch('https://tyradex.app/api/v1/pokemon');
 			const data = await response.json();
 
 			pokemonListFr.set(data);
-
 			localStorage.setItem('pokemon_list_fr', JSON.stringify(data));
 		}
 	} catch (error) {
-		console.error('Error fetching Pokemon list fr:', error);
+		console.error('Erreur lors de la récupération des données Pokemon fr:', error);
 	}
 }
 
@@ -128,9 +126,10 @@ async function fetchTypes() {
 		if (cachedData) {
 			types.set(JSON.parse(cachedData));
 		} else {
-			const response = await fetch('https://api-pokemon-fr.vercel.app/api/v1/types');
+			const response = await fetch('https://tyradex.app/api/v1/types');
 
-			const data = await response.json();
+			const textData = await response.text();
+			const data = textData ? JSON.parse(textData) : [];
 
 			types.set(data);
 
@@ -141,6 +140,26 @@ async function fetchTypes() {
 	}
 }
 
+async function fetchCandyToEvolve() {
+	try {
+		const response = await fetch('https://pogoapi.net/api/v1/pokemon_candy_to_evolve.json');
+		const data = await response.json();
+		candyToEvolve.set(data);
+	} catch (error) {
+		console.error('Error fetching Candy to Evolve data:', error);
+	}
+}
+
+async function fetchEncounterData() {
+	try {
+		const response = await fetch('https://pogoapi.net/api/v1/pokemon_encounter_data.json');
+		const data = await response.json();
+		encounterData.set(data);
+	} catch (error) {
+		console.error('Error fetching Encounter Data:', error);
+	}
+}
+
 fetchPokemonData();
 fetchCpMax();
 fetchPokemonListFr();
@@ -148,6 +167,8 @@ fetchFastMoves();
 fetchChargedMoves();
 fetchPokemonMoves();
 fetchTypes();
+fetchCandyToEvolve();
+fetchEncounterData();
 
 export const pokemonNames: any = derived(apiData, ($apiData) => {
 	const pokemonArray = Object.values($apiData);
@@ -206,24 +227,47 @@ export const pokemonMaxCp: any = derived(cpMax, ($cpMax) => {
 });
 
 export const pokeDataFR: any = derived(pokemonListFr, ($pokemonListFr) => {
-	const pokemonArray = Object.values($pokemonListFr as any);
+	const pokemonArray = Object.values($pokemonListFr || []);
+
 	const filteredPokemonArray = pokemonArray.map((pokemon: any) => {
-		const { pokedexId: id, generation, category, name, sprites, types, stats, evolution } = pokemon;
-
-		const frenchName = name.fr || '';
-		const regularSprite = sprites.regular || '';
-		const shinySprite = sprites.shiny || '';
-
+		const {
+			pokedex_id: id,
+			generation,
+			category,
+			name,
+			sprites,
+			types,
+			stats,
+			evolution,
+			catch_rate,
+			egg_groups,
+			formes,
+			height,
+			level_100,
+			resistances,
+			sexe,
+			talents,
+			weight
+		} = pokemon;
 		return {
 			id,
 			generation,
 			category,
-			frenchName,
-			regularSprite,
-			shinySprite,
+			frenchName: name?.fr || '',
+			regularSprite: sprites?.regular || '',
+			shinySprite: sprites?.shiny || '',
 			types,
 			stats,
-			evolution
+			evolution,
+			catchRate: catch_rate,
+			eggGroups: egg_groups,
+			formes,
+			height,
+			level100: level_100,
+			resistances,
+			sexe,
+			talents,
+			weight
 		};
 	});
 
@@ -293,4 +337,24 @@ export const typesList: any = derived(types, ($types) => {
 	}, {});
 
 	return Object.values(uniqueTypesMap as any);
+});
+
+export const candyToEvolveList: any = derived(candyToEvolve, ($candyToEvolve) => {
+	const candyArray = Object.values($candyToEvolve).flat();
+	const uniqueCandyMap = candyArray.reduce((map: any, candy: any) => {
+		map[candy.pokemon_id] = candy;
+		return map;
+	}, {});
+
+	return Object.values(uniqueCandyMap as any);
+});
+
+export const encounterDataList: any = derived(encounterData, ($encounterData) => {
+	const encounterArray = Object.values($encounterData);
+	const uniqueEncounterMap = encounterArray.reduce((map: any, encounter: any) => {
+		map[encounter.pokemon_id] = encounter;
+		return map;
+	}, {});
+
+	return Object.values(uniqueEncounterMap as any);
 });

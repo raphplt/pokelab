@@ -1,7 +1,7 @@
 <script>
-	import iv_calculator from '$lib/images/iv_calculator.jpg';
-	import pokemon_stats from '$lib/images/pokemon_stats.jpg';
-	import Typewriter, { loop } from 'svelte-typewriter';
+	import background from '$lib/images/background.jpg';
+	import Icon from '@iconify/svelte';
+	import Typewriter from 'svelte-typewriter';
 </script>
 
 <svelte:head>
@@ -10,33 +10,43 @@
 </svelte:head>
 
 <section
-	class="bg-gradient-to-r from-blue-400 to-blue-600 flex flex-col sm:flex-row justify-center items-center w-full pt-12 pb-36 sm:h-[100vh]"
+	class="bg-gradient-to-r flex flex-col sm:flex-row justify-center items-center w-full pt-12 h-screen"
+	style="background-image: url({background}); background-size: cover; background-position: center;"
 >
-	<div class="sm:w-[20vw] w-2/3 h-[20vh] sm:-h-unset ml-3 sm:ml-28 mt-24 sm:mt-0">
-		<h1 class="text-5xl sm:text-7xl font-roboto">Poké Lab</h1>
-		<Typewriter mode="loop">
-			<h1 class="text-xl sm:text-2xl">Maximisez votre aventure Pokémon GO avec nos outils</h1>
-		</Typewriter>
+	<div class="flex flex-col items-center flex-1 w-1/2">
+		<div
+			class="w-10/12 mx-auto flex flex-col items-center p-6 rounded-xl overflow-hidden"
+			style="background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(8px);"
+		>
+			<h1 class="text-5xl sm:text-6xl font-roboto">PokéLab</h1>
+			<Typewriter mode="loop">
+				<h1 class="text-md sm:text-lg mt-4">Maximisez votre aventure Pokémon GO avec nos outils</h1>
+			</Typewriter>
+		</div>
+		>
 	</div>
-	<div class="flex flex-col items-center gap-10 mt-6">
-		<h2 class="text-2xl">Découvrir :</h2>
-		<a rel="stylesheet" href="/iv-calculator">
-			<picture class="">
-				<img
-					src={iv_calculator}
-					alt="Welcome"
-					class=" mx-auto sm:w-2/5 w-3/4 h-1/2 rounded-xl border-2 border-black"
-				/>
-			</picture>
-		</a>
+	<div class="flex flex-col items-center flex-1 w-1/2 gap-y-5">
 		<a rel="stylesheet" href="/pokemon-stats">
-			<picture class="">
-				<img
-					src={pokemon_stats}
-					alt="Welcome"
-					class=" mx-auto sm:w-2/5 w-3/4 h-1/2 rounded-xl border-2 border-black"
-				/>
-			</picture>
+			<div
+				class="w-96 mx-auto flex flex-col items-center p-5 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300"
+				style="background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(8px);"
+			>
+				<Icon icon="mdi:pokeball" width={50} />
+				<h2 class="text-xl font-bold py-1">Statistiques des Pokémon</h2>
+				<p class="py-2 mb-4">Découvrez les statistiques de tous les Pokémon</p>
+				<Icon icon="mdi:arrow-right" width={24} class="absolute bottom-3 right-3" />
+			</div>
+		</a>
+		<a rel="stylesheet" href="/iv-calculator">
+			<div
+				class="w-96 mx-auto flex flex-col items-center p-5 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300"
+				style="background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(8px);"
+			>
+				<Icon icon="mdi:calculator-variant" width={50} />
+				<h2 class="text-xl font-bold py-1">Calculateur d'IV</h2>
+				<p class="py-2">Calculer les IV de vos Pokémon</p>
+				<Icon icon="mdi:arrow-right" width={24} class="absolute bottom-3 right-3" />
+			</div>
 		</a>
 	</div>
 </section>

@@ -1,6 +1,6 @@
 <div class="max-w-3xl mx-auto bg-white p-4 rounded-lg shadow-md mt-24 mb-24">
 	<h1 class="text-xl mb-4 mt-6">Politique relative aux cookies</h1>
-	<p>Dernière mise à jour : 27 septembre 2023</p>
+	<p>Dernière mise à jour : 31 janvier 2025</p>
 	<p>
 		Cette Politique relative aux cookies explique ce que sont les cookies et comment nous les
 		utilisons. Vous devriez lire cette politique afin de comprendre quel type de cookies nous
